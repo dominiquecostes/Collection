@@ -405,6 +405,11 @@ async function initDb(){
 })().catch(()=>{$('grid').innerHTML='<div class="empty">Le catalogue n\'a pas pu se charger. Vérifiez la connexion Internet.</div>'});
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){navigator.serviceWorker.register('sw.js').catch(()=>{});
   const chk=async()=>{try{const ks=await caches.keys();for(const k of ks){const c=await caches.open(k);if((await c.keys()).length>=360){if(!document.getElementById('offok'))$('count').insertAdjacentHTML('afterend','<span id="offok" class="count" style="color:#2f6b2a">✓ hors ligne</span>');return}}}catch(e){}setTimeout(chk,5000)};chk()}
+(()=>{const st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches;let seen=false;try{seen=localStorage.getItem('guide-ok')}catch(e){}
+if(st||seen)return;const ios=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+const d=document.createElement('div');d.id='guide';d.style.cssText='position:fixed;left:12px;right:12px;bottom:12px;z-index:60;background:#2f4a3a;color:#fff;border-radius:16px;padding:16px 18px;font-size:16px;line-height:1.45;box-shadow:0 6px 24px rgba(0,0,0,.25)';
+d.innerHTML='<b>Installer la collection sur cet appareil</b><br>'+(ios?'1. Touchez le bouton Partager (carré avec une flèche vers le haut).<br>2. Choisissez « Sur l’écran d’accueil », puis « Ajouter ».<br>3. Ouvrez ensuite « Collection » depuis l’écran d’accueil, en Wi-Fi, la première fois.':'Ouvrez le menu du navigateur puis « Installer l’application » ou « Ajouter à l’écran d’accueil ».')+'<br><button style="margin-top:10px;border:0;border-radius:10px;min-height:40px;padding:0 16px;font-size:15px;font-weight:600;background:#fff;color:#2f4a3a">J’ai compris</button>';
+d.querySelector('button').onclick=()=>{d.remove();try{localStorage.setItem('guide-ok','1')}catch(e){}};document.body.appendChild(d)})();
 </script>
 </body>
 </html>
