@@ -56,6 +56,7 @@ main{padding:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(230
 .viewer{background:#fff;display:flex;flex-direction:column;border-right:1px solid var(--line)}
 .stage{position:relative;flex:1;min-height:52vh;display:flex;align-items:center;justify-content:center;touch-action:pan-y}
 .stage img{max-width:100%;max-height:68vh;object-fit:contain;user-select:none;-webkit-user-drag:none}
+@media (min-width:901px){.viewer{position:sticky;top:0;align-self:start;min-height:calc(100vh - 80px)}}
 .nav{position:absolute;top:50%;transform:translateY(-50%);width:56px;height:56px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.92);font-size:26px;display:flex;align-items:center;justify-content:center}
 .nav.l{left:12px}.nav.r{right:12px}
 .thumbs{display:flex;gap:8px;padding:12px;overflow-x:auto;border-top:1px solid #f1ede7}
@@ -64,6 +65,12 @@ main{padding:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(230
 .thumbs img{width:100%;height:100%;object-fit:contain}
 .side{padding:20px 22px 40px}
 .side h2{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--soft);margin:22px 0 10px;font-weight:600}
+#essai .zl{font-size:14px;font-weight:600;margin:12px 0 6px}
+#essai .mt{border:1px solid var(--line);background:#fff;border-radius:10px;min-height:40px;padding:0 10px;font-size:16px;margin:0 0 8px;color:inherit}
+#essai .sw{display:flex;flex-wrap:wrap;gap:8px}
+#essai .sw button{width:40px;height:40px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);padding:0;font-size:11px;cursor:pointer}
+#essai .sw button.on{box-shadow:0 0 0 3px #2f4a3a}
+#essai .sw button.org{background:#fff;color:#555;font-weight:700}
 .side h2:first-child{margin-top:0}
 table{width:100%;border-collapse:collapse;font-size:17px;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
 td{padding:13px 14px;border-bottom:1px solid #f1ede7;vertical-align:top}
@@ -157,6 +164,12 @@ body.apercu{padding-bottom:64px}
         </div>
         <div class="sec" id="rmbox"></div>
         <p class="note" id="edmsg"></p>
+      </div>
+      <div id="essai" hidden>
+        <h2>Essayer une matière</h2>
+        <div id="ezones"></div>
+        <button class="edbtn" id="eorig">Photo d’origine</button>
+        <p class="note" id="enote">Coloris et motifs relevés sur vos cartes matière. Le rendu à l’écran reste indicatif.</p>
       </div>
       <h2>Fiche technique</h2>
       <table id="ftech"></table>
@@ -252,12 +265,42 @@ $('grid').onclick=e=>{
   if(e.target.closest('#back')){showOut=false;renderGrid();return}
   const b=e.target.closest('.card');if(b)open(+b.dataset.i)};
 
+// ---------- essai matière ----------
+let TEINTES={};const TC={};let TSEL={},TURL=null,TJOB=0;
+const NUAN={"Nubuck": [["TOURNESOL", "#cbb078"], ["ABRICOT", "#c17d53"], ["SAND", "#bfa886"], ["ANIS", "#71987c"], ["VERT", "#566350"], ["CAMEL DAUPHI", "#a6885b"], ["ANTHRACITE", "#444136"], ["OCEAN / BLUE NIGHT", "#283041"], ["MOKA", "#382d29"], ["CARIBIAN", "#4c628d"], ["ATOLL", "#7db1ba"], ["CAFE", "#6b574c"], ["PINK", "#ffaac1"], ["FIRE", "#d55a5b"], ["SADDLE", "#bb936b"], ["NOIR", "#272929"], ["VIOLET", "#70576b"], ["BARBIE", "#dcc2b8"], ["BORDEAUX", "#794a4a"], ["DENIM", "#74818c"], ["TERRE", "#9f8a74"]], "Nappa": [["KAKI", "#59533d"], ["BLANC", "#fbfaf3"], ["NOISETTE", "#573c35"], ["NOIR", "#1d2123"], ["PORCELAINE", "#c9bb9d"], ["CHATAIGNE", "#30201d"], ["NAVY", "#151c2a"], ["BEIGE", "#a08966"], ["EBENE", "#1d1817"], ["MEDOC", "#451d21"], ["DUNE", "#534031"], ["GRANIT", "#6a6f70"], ["ANTHRACITE", "#393b39"], ["TAUPE", "#3a2618"], ["GOLD / NUT", "#653c21"], ["ROSA", "#ec989e"], ["RADIANT ORCHID", "#8d3154"], ["RUBINO", "#6f2626"], ["MARINO", "#728a9a"]], "Vachette grainée": [["MARRON", "#383330"], ["BEIGE", "#b39c7e"], ["BLANC", "#dad7ce"], ["NOIR", "#1b1f21"]], "Vachette forte Denver": [["MARRON", "#37322e"], ["NOIR", "#212529"]], "Buck oil": [["TABAC", "#5d432f"], ["NOIR", "#474d4c"]], "Licra": [["BEIGE", "#c2a77f"], ["MARRON", "#2c2726"], ["MARINE", "#27324a"], ["NOIR", "#242728"]], "Velours": [["BLANC", "#dad6c9"], ["SOLEIL", "#c5ac5a"], ["SAND", "#b6aa94"], ["GRIS", "#8a867f"], ["CENTENO", "#b2a07d"], ["BORDEAUX", "#653c43"], ["EBENE", "#3c352e"], ["ROUGE", "#9c3f41"], ["CAMEL", "#a0774d"], ["MARINE", "#2b3037"], ["BISON", "#725946"], ["NOIR", "#2c3033"]], "Toile coton": [["BLANC", "#dbd9d0"], ["NOIR", "#15191d"], ["PRIMEVERE", "#dce4a0"], ["MASTIC", "#c3af8a"], ["TERRE", "#807567"], ["CIEL ACIDE", "#a3cfd0"], ["MARRON", "#352b27"], ["KAKI", "#726b56"], ["MARINE", "#263443"], ["ROUGE", "#a52831"], ["AUBERGINE", "#654846"], ["BLEU 1572", "#4d6d81"]], "Résille": [["MARINE", "#11171f"], ["BEIGE", "#b29b89"], ["BLANC", "#e1ddd8"], ["NOIR", "#0f1316"], ["DUNE", "#837769"]], "VIM": [["TERRACOTTA", "#80533c"], ["TABAC", "#2f2826"], ["GRIS", "#3d3c40"], ["BAMBOU", "#646148"], ["CAMEL", "#68482b"], ["PAON", "#284356"]], "Guépard": [["ROUGE", "#bf958c", "Guépard ROUGE"], ["BLEU", "#b2b6b1", "Guépard BLEU"], ["GOLD", "#d2c8ac", "Guépard GOLD"]], "Zèbre": [["ZEBRE", "#625c50", "Zèbre ZEBRE"]], "Croco": [["BLANC VERNIS", "#ede9de", "Croco BLANC VERNIS"], ["NATUREL", "#1e1d1a", "Croco NATUREL"]], "Paillette": [["NOIR", "#2e3232", "Paillette NOIR"], ["JEAN", "#7d878b", "Paillette JEAN"], ["BEIGE", "#b3ac9e", "Paillette BEIGE"], ["ROUGE", "#ad5655", "Paillette ROUGE"]], "Maya": [["MARINE", "#5f646f", "Maya MARINE"], ["ROUGE", "#af5f5b", "Maya ROUGE"], ["BEIGE", "#cdc3ae", "Maya BEIGE"], ["NOIR", "#484f51", "Maya NOIR"]], "Star": [["MARINE", "#606b6f", "Star MARINE"], ["BEIGE", "#8c9094", "Star BEIGE"]], "Serpent": [["ROUGE", "#78333d", "Serpent ROUGE"], ["BLEU PASTEL", "#7b9386", "Serpent BLEU PASTEL"], ["NUT", "#815c41", "Serpent NUT"], ["BEIGE", "#a89679", "Serpent BEIGE"], ["NATUREL", "#726558", "Serpent NATUREL"], ["BLEU CIAN", "#4a5052", "Serpent BLEU CIAN"], ["BLEU NUIT", "#1f2329", "Serpent BLEU NUIT"], ["GRIS", "#726f67", "Serpent GRIS"]], "Éclat serpent": [["BLEU", "#7e7c78", "Éclat serpent BLEU"], ["GOLD", "#756d64", "Éclat serpent GOLD"], ["ROSE", "#a99a8d", "Éclat serpent ROSE"], ["ROUGE", "#736360", "Éclat serpent ROUGE"]], "Motif": [["BLEU", "#6e7380", "Motif BLEU"], ["BLANC", "#cfc8c3", "Motif BLANC"], ["NOIR", "#716961", "Motif NOIR"]], "Étoile": [["CAMEL", "#957853", "Étoile CAMEL"], ["BLEU", "#3f7392", "Étoile BLEU"], ["NOIR", "#15191d", "Étoile NOIR"], ["ROSÉ", "#bf9988", "Étoile ROSÉ"]], "Éclat grainé": [["ARGENT", "#8e8b82", "Éclat grainé ARGENT"], ["BLEU CIEL", "#66808f", "Éclat grainé BLEU CIEL"], ["BLEU NUIT", "#16293e", "Éclat grainé BLEU NUIT"], ["OR", "#3a2d1f", "Éclat grainé OR"]], "Faux tressé": [["NOIR", "#474846", "Faux tressé NOIR"], ["MARRON", "#403535", "Faux tressé MARRON"], ["MARRON CLAIR", "#593a2b", "Faux tressé MARRON CLAIR"], ["BEIGE", "#a38e7a", "Faux tressé BEIGE"], ["BLANC", "#aca79e", "Faux tressé BLANC"], ["ARGENTÉ", "#74726b", "Faux tressé ARGENTÉ"]], "Tuile": [["ROUGE", "#681c21", "Tuile ROUGE"], ["BLEU", "#56616c", "Tuile BLEU"], ["BEIGE", "#805e3e", "Tuile BEIGE"], ["NOIR", "#101416", "Tuile NOIR"]], "Tissu 3D": [["NOIR", "#0c1015", "Tissu 3D NOIR"], ["BLANC", "#d5d4ce", "Tissu 3D BLANC"], ["GRIS", "#777874", "Tissu 3D GRIS"], ["BLEU", "#0e141e", "Tissu 3D BLEU"]]};let MOT={};const TMAT={};
+const hex=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16));
+const ldImg=u=>new Promise((ok,ko)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=ko;i.src=u});
+function zoneHtml(k){const t=TEINTES[list[cur].modele],z=t.zones[k],m=TMAT[k]||'Nubuck';
+  return `<div class="zl">${esc(z.piece)} : <span data-n="${k}">${TSEL[k]?esc(TSEL[k].nom):'d’origine'}</span></div><select class="mt" data-mk="${k}" aria-label="Matière pour ${esc(z.piece)}">${Object.keys(NUAN).map(x=>`<option${x===m?' selected':''}>${x}</option>`).join('')}</select><div class="sw" data-z="${k}"><button class="org${TSEL[k]?'':' on'}" data-c="" aria-label="${esc(z.piece)} : d’origine" title="D’origine">✓</button>${NUAN[m].map(([nm,c,tx])=>`<button data-c="${c}"${tx?` data-tx="${esc(tx)}"`:''} data-nm="${esc(m+' '+nm)}" class="${TSEL[k]&&TSEL[k].nom===m+' '+nm?'on':''}" style="background:${c}${tx&&MOT[tx]?` url(${MOT[tx]}) center/cover`:''}" aria-label="${esc(z.piece)} : ${esc(m+' '+nm)}" title="${esc(nm)}"></button>`).join('')}</div>`}
+function drawZones(){const t=TEINTES[list[cur].modele];$('ezones').innerHTML=t.zones.map((z,k)=>`<div data-zk="${k}">${zoneHtml(k)}</div>`).join('')}
+function drawEssai(){const d=list[cur];const t=d&&TEINTES[d.modele];TSEL={};TURL=null;for(const k in TMAT)delete TMAT[k];$('essai').hidden=!t;if(t)drawZones()}
+$('ezones').onchange=e=>{const t=e.target;if(t.dataset.mk===undefined)return;TMAT[t.dataset.mk]=t.value;t.closest('[data-zk]').innerHTML=zoneHtml(t.dataset.mk)};
+$('ezones').onclick=e=>{const b=e.target.closest('button');if(!b)return;const w=b.closest('[data-zk]'),k=w.dataset.zk;
+  if(b.dataset.c)TSEL[k]={c:b.dataset.c,nom:b.dataset.nm,tx:b.dataset.tx||''};else delete TSEL[k];w.innerHTML=zoneHtml(k);recolor()};
+$('eorig').onclick=()=>{drawEssai();showPh()};
+const TXC={};async function texData(k){if(TXC[k])return TXC[k];const im=await ldImg(MOT[k]);const cv=document.createElement('canvas');cv.width=im.naturalWidth;cv.height=im.naturalHeight;const x=cv.getContext('2d');x.drawImage(im,0,0);return TXC[k]={w:cv.width,h:cv.height,d:x.getImageData(0,0,cv.width,cv.height).data}}
+async function recolor(){const d=list[cur];const t=TEINTES[d.modele];const job=++TJOB;
+  if(!Object.keys(TSEL).length){TURL=null;showPh();return}
+  try{let c=TC[d.modele];
+    if(!c){const P=PH[d.modele];if(!P||!P[t.vue])return;const im=await ldImg(P[t.vue]);const W=im.naturalWidth,H=im.naturalHeight;
+      const cv=document.createElement('canvas');cv.width=W;cv.height=H;const x=cv.getContext('2d',{willReadFrequently:true});x.drawImage(im,0,0);const base=x.getImageData(0,0,W,H);
+      const ms=[];for(const z of t.zones){const mi=await ldImg(z.masque);x.clearRect(0,0,W,H);x.drawImage(mi,0,0,W,H);const md=x.getImageData(0,0,W,H).data;const a=new Uint8Array(W*H);for(let i=0;i<W*H;i++)a[i]=md[i*4];ms.push(a)}
+      c=TC[d.modele]={cv,x,base,ms,W,H}}
+    if(job!==TJOB)return;
+    const o=new ImageData(new Uint8ClampedArray(c.base.data),c.W,c.H),p=o.data,b=c.base.data;
+    for(const k in TSEL){const T=hex(TSEL[k].c),m=c.ms[k],M=t.zones[k].lum_moy;const tx=TSEL[k].tx&&MOT[TSEL[k].tx]?await texData(TSEL[k].tx):null;
+      if(job!==TJOB)return;
+      for(let i=0,n=c.W*c.H;i<n;i++){const al=m[i];if(!al)continue;const j=i*4,L=0.299*b[j]+0.587*b[j+1]+0.114*b[j+2],f=al/255;
+        let R=T;if(tx){let u=(i%c.W)%(2*tx.w),w=((i/c.W)|0)%(2*tx.h);if(u>=tx.w)u=2*tx.w-1-u;if(w>=tx.h)w=2*tx.h-1-w;const o=(w*tx.w+u)*4,d=tx.d;R=[d[o],d[o+1],d[o+2]]}
+        for(let q=0;q<3;q++){const v=0.5*R[q]*(L/M)+0.5*(R[q]+(L-M)*1.1);p[j+q]=p[j+q]*(1-f)+v*f}}}
+    c.x.putImageData(o,0,0);TURL=c.cv.toDataURL('image/jpeg',.9);ph=t.vue;showPh()}catch(e){console.log(e)}}
+
 // ---------- fiche ----------
 function open(i){
   cur=(i+list.length)%list.length;ph=0;const d=list[cur];
   $('fref').textContent='Modèle '+d.modele;
   $('ftags').innerHTML=tags(d);closeEd();
-  drawFiche();
+  drawFiche();drawEssai();
   $('thumbs').innerHTML='';showPh();$('fiche').classList.add('open');$('fiche').querySelector('.fbody').scrollTop=0;
   loadPh(d);
 }
@@ -274,7 +317,7 @@ function showPh(){
   const d=list[cur];const P=photosOf(d);const n=P.length;
   $('pl').style.display=$('pr').style.display=n>1?'':'none';
   if(!n){const t=thumbOf(d);if(t){$('big').src=t;$('big').alt='Modèle '+d.modele}else{$('big').removeAttribute('src');$('big').alt='Photo à venir'}return}
-  ph=(ph+n)%n;$('big').src=P[ph];$('big').alt=`Modèle ${d.modele}, vue ${ph+1}`;
+  ph=(ph+n)%n;const te=TEINTES[d.modele];$('big').src=(TURL&&te&&ph===te.vue)?TURL:P[ph];$('big').alt=`Modèle ${d.modele}, vue ${ph+1}`;
   [...$('thumbs').children].forEach((b,k)=>b.classList.toggle('on',k===ph));
 }
 $('thumbs').onclick=e=>{const b=e.target.closest('button');if(b){ph=+b.dataset.k;showPh()}};
@@ -397,6 +440,8 @@ async function initDb(){
   renderFilters();
   const inl=id=>{const e=document.getElementById(id);return e?JSON.parse(e.textContent):null};
   const TI=inl('d-vign');if(TI)TH=TI;
+  MOT=inl('d-motifs')||{};if(!document.getElementById('d-motifs'))fetch('data/motifs.json').then(r=>r.ok?r.json():{}).then(j=>{MOT=j}).catch(()=>{});
+  TEINTES=inl('d-teintes')||{};if(!document.getElementById('d-teintes'))fetch('data/teintes.json').then(r=>r.ok?r.json():{}).then(j=>{TEINTES=j}).catch(()=>{});
   const j=inl('d-modeles')||await (await fetch('data/modeles.json')).json();
   BASE=j.modeles;BASE.forEach(d=>{if(d.photos&&(d.photos.length||d.photos>0))HASJPG.add(d.modele)});FN=j.legende.familles||{};FAMS=Object.keys(FN);if(j.pieces_par_defaut)PIECES=j.pieces_par_defaut;
   const FI=inl('d-fiches');if(FI)FICHES=FI.fiches||{};else try{const f=await fetch('data/fiches.json');if(f.ok){const fj=await f.json();FICHES=fj.fiches||{}}}catch(e){}
