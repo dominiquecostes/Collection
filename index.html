@@ -177,7 +177,7 @@ body.apercu{padding-bottom:64px}
         <button class="edbtn pri" id="egbtn">Mode guidé, pièce par pièce</button>
         <div id="eguide" hidden></div>
         <div id="ezones"></div>
-        <button class="edbtn" id="eorig">Photo d’origine</button>
+        <button class="edbtn" id="eorig">Tout recommencer</button>
         <p class="note" id="enote">Coloris et motifs relevés sur vos cartes matière. Le rendu à l’écran reste indicatif.</p>
       </div>
       <h2>Fiche technique</h2>
@@ -280,30 +280,38 @@ const NUAN={"Nubuck": [["TOURNESOL", "#cbb078"], ["ABRICOT", "#c17d53"], ["SAND"
 const hex=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16));
 const ldImg=u=>new Promise((ok,ko)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=ko;i.src=u});
 function zoneHtml(k){const t=TEINTES[list[cur].modele],z=t.zones[k],m=TMAT[k]||'Nubuck';
-  return `<div class="zl">${esc(z.piece)} : <span data-n="${k}">${TSEL[k]?esc(TSEL[k].nom):'d’origine'}</span></div><select class="mt" data-mk="${k}" aria-label="Matière pour ${esc(z.piece)}">${Object.keys(NUAN).map(x=>`<option${x===m?' selected':''}>${x}</option>`).join('')}</select><div class="sw" data-z="${k}"><button class="org${TSEL[k]?'':' on'}" data-c="" aria-label="${esc(z.piece)} : d’origine" title="D’origine">✓</button>${NUAN[m].map(([nm,c,tx])=>`<button data-c="${c}"${tx?` data-tx="${esc(tx)}"`:''} data-nm="${esc(m+' '+nm)}" class="${TSEL[k]&&TSEL[k].nom===m+' '+nm?'on':''}" style="background:${c}${tx&&MOT[tx]?` url(${MOT[tx]}) center/cover`:''}" aria-label="${esc(z.piece)} : ${esc(m+' '+nm)}" title="${esc(nm)}"></button>`).join('')}</div>`}
-function drawLeg(){const d=list[cur];const t=d&&TEINTES[d.modele];const ks=t?Object.keys(TSEL):[];$('eleg').hidden=!ks.length;if(!ks.length)return;
-  $('elegt').innerHTML=t.zones.map((z,k)=>{const x=TSEL[k];let m='d’origine',c='';if(x){const i=x.nom.lastIndexOf(' ');const mat=Object.keys(NUAN).find(n=>x.nom.startsWith(n+' '));m=mat||x.nom;c=mat?x.nom.slice(mat.length+1):''}return `<tr><td>${esc(z.piece)}</td><td>${esc(m)}</td><td>${esc(c)}</td></tr>`}).join('')}
+  return `<div class="zl">${esc(z.piece)} : <span data-n="${k}">${TSEL[k]?esc(TSEL[k].nom):'à choisir'}</span></div><select class="mt" data-mk="${k}" aria-label="Matière pour ${esc(z.piece)}">${Object.keys(NUAN).map(x=>`<option${x===m?' selected':''}>${x}</option>`).join('')}</select><div class="sw" data-z="${k}">${NUAN[m].map(([nm,c,tx])=>`<button data-c="${c}"${tx?` data-tx="${esc(tx)}"`:''} data-nm="${esc(m+' '+nm)}" class="${TSEL[k]&&TSEL[k].nom===m+' '+nm?'on':''}" style="background:${c}${tx&&MOT[tx]?` url(${MOT[tx]}) center/cover`:''}" aria-label="${esc(z.piece)} : ${esc(m+' '+nm)}" title="${esc(nm)}"></button>`).join('')}</div><div class="gsws near" data-z="${k}" hidden></div>`}
+function drawLeg(){const d=list[cur];const t=d&&TEINTES[d.modele];$('eleg').hidden=!t;if(!t)return;
+  $('elegt').innerHTML=t.zones.map((z,k)=>{const x=TSEL[k];let m='à choisir',c='';if(x){const i=x.nom.lastIndexOf(' ');const mat=Object.keys(NUAN).find(n=>x.nom.startsWith(n+' '));m=mat||x.nom;c=mat?x.nom.slice(mat.length+1):''}return `<tr><td>${esc(z.piece)}</td><td>${esc(m)}</td><td>${esc(c)}</td></tr>`}).join('')}
 function drawZones(){const t=TEINTES[list[cur].modele];$('ezones').innerHTML=t.zones.map((z,k)=>`<div data-zk="${k}">${zoneHtml(k)}</div>`).join('')}
 function drawEssai(){const d=list[cur];const t=d&&TEINTES[d.modele];TSEL={};TURL=null;$('eleg').hidden=true;G=null;if(typeof gDraw==='function')gDraw();for(const k in TMAT)delete TMAT[k];$('essai').hidden=!t;if(t)drawZones()}
 $('ezones').onchange=e=>{const t=e.target;if(t.dataset.mk===undefined)return;TMAT[t.dataset.mk]=t.value;t.closest('[data-zk]').innerHTML=zoneHtml(t.dataset.mk)};
 $('ezones').onclick=e=>{const b=e.target.closest('button');if(!b)return;const w=b.closest('[data-zk]'),k=w.dataset.zk;
-  if(b.dataset.c)TSEL[k]={c:b.dataset.c,nom:b.dataset.nm,tx:b.dataset.tx||''};else delete TSEL[k];w.innerHTML=zoneHtml(k);drawLeg();recolor()};
+  if(b.dataset.near){const n=w.querySelector('.near');n.innerHTML='<div class="note" style="width:100%">Même couleur que la photo, dans chaque matière :</div>'+nearHtml(k);n.hidden=!n.hidden;return}
+  TSEL[k]={c:b.dataset.c,nom:b.dataset.nm,tx:b.dataset.tx||'',keep:!!b.dataset.keep};w.innerHTML=zoneHtml(k);drawLeg();recolor()};
+function lab(h){const v=(Array.isArray(h)?h:hex(h)).map(x=>{x/=255;return x>0.04045?Math.pow((x+0.055)/1.055,2.4):x/12.92});
+  const X=(v[0]*0.4124+v[1]*0.3576+v[2]*0.1805)/0.95047,Y=v[0]*0.2126+v[1]*0.7152+v[2]*0.0722,Z=(v[0]*0.0193+v[1]*0.1192+v[2]*0.9505)/1.08883;
+  const f=t=>t>0.008856?Math.cbrt(t):7.787*t+16/116;return [116*f(Y)-16,500*(f(X)-f(Y)),200*(f(Y)-f(Z))]}
+function proches(rgb,n){const a=lab(rgb),out=[];for(const m in NUAN)for(const [nm,c,tx] of NUAN[m]){if(tx)continue;const b=lab(c);out.push({m,nm,c,d:Math.hypot(a[0]-b[0],a[1]-b[1],a[2]-b[2])})}
+  out.sort((x,y)=>x.d-y.d);const seen={},r=[];for(const o of out){if(seen[o.m])continue;seen[o.m]=1;r.push(o);if(r.length>=n)break}return r}
+function nearHtml(k){const z=TEINTES[list[cur].modele].zones[k];return proches(z.rgb||[128,128,128],10).map(o=>`<div class="gsw"><button data-c="${o.c}" data-nm="${esc(o.m+' '+o.nm)}" data-keep="1" style="background:${o.c}" aria-label="${esc(o.m+' '+o.nm)}"></button>${esc(o.m)}<br>${esc(o.nm)}</div>`).join('')}
 let G=null;
 function gDraw(){const d=list[cur];const t=d&&TEINTES[d.modele];const el=$('eguide');
   if(!G||!t){el.hidden=true;$('ezones').hidden=false;$('egbtn').hidden=false;$('eorig').hidden=false;return}
   el.hidden=false;$('ezones').hidden=true;$('egbtn').hidden=true;$('eorig').hidden=true;
   const n=t.zones.length;
-  if(G.k>=n){el.innerHTML=`<div class="gq">C’est terminé.</div><p class="note">Le tableau « Pièces à couper » est sous la photo.</p><div class="edrow"><button class="edbtn pri" data-g="restart">Recommencer</button><button class="edbtn" data-g="back">← Pièce précédente</button><button class="edbtn" data-g="free">Réglage libre</button></div>`;return}
+  if(G.k>=n){el.innerHTML=`<div class="gq">C’est terminé.</div><p class="note">Le tableau « Pièces à couper » est sous la photo.${Object.keys(t.zones).some(k=>!TSEL[k])?' Certaines pièces sont encore à choisir.':''}</p><div class="edrow"><button class="edbtn pri" data-g="restart">Recommencer</button><button class="edbtn" data-g="back">← Pièce précédente</button><button class="edbtn" data-g="free">Réglage libre</button></div>`;return}
   const z=t.zones[G.k],head=`<div class="gstep">Pièce ${G.k+1} sur ${n}</div>`;
-  if(G.step==='mat')el.innerHTML=head+`<div class="gq">Quelle matière pour : ${esc(z.piece)} ?</div><div class="gm">${Object.keys(NUAN).map(m=>`<button class="edbtn" data-gm="${esc(m)}">${esc(m)}</button>`).join('')}</div><div class="edrow"><button class="edbtn" data-g="orig">Garder d’origine</button>${G.k?'<button class="edbtn" data-g="back">← Pièce précédente</button>':''}<button class="edbtn" data-g="free">Quitter le mode guidé</button></div>`;
+  if(G.step==='near'){el.innerHTML=head+`<div class="gq">Même couleur que la photo pour : ${esc(z.piece)}. Dans quelle matière ?</div><div class="gsws">${nearHtml(G.k)}</div><div class="edrow"><button class="edbtn" data-g="mat">← Changer de couleur</button></div>`;el.scrollIntoView({block:'nearest'});return}
+  if(G.step==='mat')el.innerHTML=head+`<div class="gq">Quelle matière pour : ${esc(z.piece)} ?</div><div class="gm">${Object.keys(NUAN).map(m=>`<button class="edbtn" data-gm="${esc(m)}">${esc(m)}</button>`).join('')}</div><div class="edrow">${G.k?'<button class="edbtn" data-g="back">← Pièce précédente</button>':''}<button class="edbtn" data-g="free">Quitter le mode guidé</button></div>`;
   else el.innerHTML=head+`<div class="gq">Quel coloris de ${esc(G.mat)} pour : ${esc(z.piece)} ?</div><div class="gsws">${NUAN[G.mat].map(([nm,c,tx])=>`<div class="gsw"><button data-c="${c}"${tx?` data-tx="${esc(tx)}"`:''} data-nm="${esc(G.mat+' '+nm)}" style="background:${c}${tx&&MOT[tx]?` url(${MOT[tx]}) center/cover`:''}" aria-label="${esc(nm)}"></button>${esc(nm)}</div>`).join('')}</div><div class="edrow"><button class="edbtn" data-g="mat">← Autre matière</button></div>`;
   el.scrollIntoView({block:'nearest'})}
 $('egbtn').onclick=()=>{G={k:0,step:'mat'};gDraw()};
 $('eguide').onclick=e=>{const b=e.target.closest('button');if(!b)return;const k=G.k;
   if(b.dataset.gm){G.mat=b.dataset.gm;G.step='col'}
-  else if(b.dataset.c){TSEL[k]={c:b.dataset.c,nom:b.dataset.nm,tx:b.dataset.tx||''};TMAT[k]=G.mat;drawLeg();recolor();G={k:k+1,step:'mat'}}
+  else if(b.dataset.c){TSEL[k]={c:b.dataset.c,nom:b.dataset.nm,tx:b.dataset.tx||'',keep:!!b.dataset.keep};if(G.mat&&!b.dataset.keep)TMAT[k]=G.mat;drawLeg();recolor();G={k:k+1,step:'mat'}}
   else{const a=b.dataset.g;
-    if(a==='orig'){delete TSEL[k];drawLeg();recolor();G={k:k+1,step:'mat'}}
+    if(a==='orig'){G={k,step:'near'}}
     else if(a==='back')G={k:Math.max(0,k-1),step:'mat'};
     else if(a==='mat')G.step='mat';
     else if(a==='restart'){TSEL={};for(const x in TMAT)delete TMAT[x];drawLeg();recolor();G={k:0,step:'mat'}}
@@ -312,7 +320,7 @@ $('eguide').onclick=e=>{const b=e.target.closest('button');if(!b)return;const k=
 $('eorig').onclick=()=>{drawEssai();showPh()};
 const TXC={};async function texData(k){if(TXC[k])return TXC[k];const im=await ldImg(MOT[k]);const cv=document.createElement('canvas');cv.width=im.naturalWidth;cv.height=im.naturalHeight;const x=cv.getContext('2d');x.drawImage(im,0,0);return TXC[k]={w:cv.width,h:cv.height,d:x.getImageData(0,0,cv.width,cv.height).data}}
 async function recolor(){const d=list[cur];const t=TEINTES[d.modele];const job=++TJOB;
-  if(!Object.keys(TSEL).length){TURL=null;showPh();return}
+  if(!Object.keys(TSEL).some(k=>!TSEL[k].keep)){TURL=null;showPh();return}
   try{let c=TC[d.modele];
     if(!c){const P=PH[d.modele];if(!P||!P[t.vue])return;const im=await ldImg(P[t.vue]);const W=im.naturalWidth,H=im.naturalHeight;
       const cv=document.createElement('canvas');cv.width=W;cv.height=H;const x=cv.getContext('2d',{willReadFrequently:true});x.drawImage(im,0,0);const base=x.getImageData(0,0,W,H);
@@ -320,7 +328,7 @@ async function recolor(){const d=list[cur];const t=TEINTES[d.modele];const job=+
       c=TC[d.modele]={cv,x,base,ms,W,H}}
     if(job!==TJOB)return;
     const o=new ImageData(new Uint8ClampedArray(c.base.data),c.W,c.H),p=o.data,b=c.base.data;
-    for(const k in TSEL){const T=hex(TSEL[k].c),m=c.ms[k],M=t.zones[k].lum_moy;const tx=TSEL[k].tx&&MOT[TSEL[k].tx]?await texData(TSEL[k].tx):null;
+    for(const k in TSEL){if(TSEL[k].keep)continue;const T=hex(TSEL[k].c),m=c.ms[k],M=t.zones[k].lum_moy;const tx=TSEL[k].tx&&MOT[TSEL[k].tx]?await texData(TSEL[k].tx):null;
       if(job!==TJOB)return;
       for(let i=0,n=c.W*c.H;i<n;i++){const al=m[i];if(!al)continue;const j=i*4,L=0.299*b[j]+0.587*b[j+1]+0.114*b[j+2],f=al/255;
         let R=T;if(tx){let u=(i%c.W)%(2*tx.w),w=((i/c.W)|0)%(2*tx.h);if(u>=tx.w)u=2*tx.w-1-u;if(w>=tx.h)w=2*tx.h-1-w;const o=(w*tx.w+u)*4,d=tx.d;R=[d[o],d[o+1],d[o+2]]}
