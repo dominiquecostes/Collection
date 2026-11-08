@@ -1,0 +1,3062 @@
+{
+ "version": 1,
+ "mis_a_jour": "2026-11-08",
+ "legende": {
+  "saisons": {
+   "P": "Printemps",
+   "E": "Été",
+   "A": "Automne-Hiver"
+  },
+  "public": {
+   "F": "Femme",
+   "H": "Homme",
+   "E": "Enfant"
+  },
+  "familles": {
+   "mode": "Baskets mode",
+   "sport": "Sport",
+   "rando": "Randonnée / outdoor",
+   "ville": "Ville",
+   "confort": "Confort",
+   "bottines": "Bottines et boots",
+   "pantoufles": "Pantoufles / chaussons",
+   "sandales": "Sandales / nu-pieds"
+  }
+ },
+ "pieces_par_defaut": [
+  "Claque",
+  "Quartiers",
+  "Garants",
+  "Languette",
+  "Doublure"
+ ],
+ "modeles": [
+  {
+   "modele": "1003502",
+   "codes_barres": [
+    "1003502320002"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "E"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "1053501",
+   "codes_barres": [
+    "1053501070002"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "1053506",
+   "codes_barres": [
+    "1053506130008"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "1089002",
+   "codes_barres": [
+    "1089002190000"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "1278407",
+   "codes_barres": [
+    "1278407320000"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "E"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "sport"
+  },
+  {
+   "modele": "1320501",
+   "codes_barres": [
+    "1320501170002"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "1606013",
+   "codes_barres": [
+    "1606013210000"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "1641501",
+   "codes_barres": [
+    "1641501070001"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "1642001",
+   "codes_barres": [
+    "1642001190008"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "1647501",
+   "codes_barres": [
+    "1647501050005"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "1656101",
+   "codes_barres": [
+    "1656101070009"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "1659403",
+   "codes_barres": [
+    "1659403110008"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "1663801",
+   "codes_barres": [
+    "1663801070000"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "1665701",
+   "codes_barres": [
+    "1665701070005"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "1683105",
+   "codes_barres": [
+    "1683105170008"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "1683702",
+   "codes_barres": [
+    "1683702170005"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "1683710",
+   "codes_barres": [
+    "1683710170004"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "1692401",
+   "codes_barres": [
+    "1692401150003",
+    "1692401170001"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "1709803",
+   "codes_barres": [
+    "1709803320009"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "E"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "1723306",
+   "codes_barres": [
+    "1723306110004"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "1736901",
+   "codes_barres": [
+    "1736901050002"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "1763703",
+   "codes_barres": [
+    "1763703130007"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "1764303",
+   "codes_barres": [
+    "1764303130008",
+    "1764303110000"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "1778901",
+   "codes_barres": [
+    "1778901100004"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "1779201",
+   "codes_barres": [
+    "1779201110007"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "1826201",
+   "codes_barres": [
+    "1826201170002"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "1841301",
+   "codes_barres": [
+    "1841301090005"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "ville"
+  },
+  {
+   "modele": "1852101",
+   "codes_barres": [
+    "1852101170002"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "1863308",
+   "codes_barres": [
+    "1863308340006"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "E"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "1864102",
+   "codes_barres": [
+    "1864102340001"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "E"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "1864605",
+   "codes_barres": [
+    "1864605060000"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "1864608",
+   "codes_barres": [
+    "1864608080005"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "1865301",
+   "codes_barres": [
+    "1865301190008"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "1875111",
+   "codes_barres": [
+    "1875111120003"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "1875807",
+   "codes_barres": [
+    "1875807190006"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "1876302",
+   "codes_barres": [
+    "1876302380008"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "E"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2005801",
+   "codes_barres": [
+    "2005801100001"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2005805",
+   "codes_barres": [
+    "2005805050005"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2005808",
+   "codes_barres": [
+    "2005808050002"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2008903",
+   "codes_barres": [
+    "2008903170002"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2009802",
+   "codes_barres": [
+    "2009802360006"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "E"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2011003",
+   "codes_barres": [
+    "2011003110007"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2014902",
+   "codes_barres": [
+    "2014902190002"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2016108",
+   "codes_barres": [
+    "2016108130004"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2016913",
+   "codes_barres": [
+    "2016913190002"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2028101",
+   "codes_barres": [
+    "2028101190008"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "2032901",
+   "codes_barres": [
+    "2032901090000"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2040901",
+   "codes_barres": [
+    "2040901070007"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "ville"
+  },
+  {
+   "modele": "2042802",
+   "codes_barres": [
+    "2042802090009"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2048901",
+   "codes_barres": [
+    "2048901170000"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2049901",
+   "codes_barres": [
+    "2049901190005"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2051001",
+   "codes_barres": [
+    "2051001110005"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2052201",
+   "codes_barres": [
+    "2052201090005"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2053801",
+   "codes_barres": [
+    "2053801150007"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2057201",
+   "codes_barres": [
+    "2057201170009"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2064801",
+   "codes_barres": [
+    "2064801090002"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2073901",
+   "codes_barres": [
+    "2073901080004"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2074203",
+   "codes_barres": [
+    "2074203110000"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2085203",
+   "codes_barres": [
+    "2085203090001"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2088602",
+   "codes_barres": [
+    "2088602380001"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "E"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2090602",
+   "codes_barres": [
+    "2090602130005"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "sport"
+  },
+  {
+   "modele": "2091402",
+   "codes_barres": [
+    "2091402160001"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "sport"
+  },
+  {
+   "modele": "2095701",
+   "codes_barres": [
+    "2095701170006"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "ville"
+  },
+  {
+   "modele": "2107204",
+   "codes_barres": [
+    "2107204360003"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "E"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2108801",
+   "codes_barres": [
+    "2108801150004"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2125901",
+   "codes_barres": [
+    "2125901170008"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "2130404",
+   "codes_barres": [
+    "2130404130008"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2135501",
+   "codes_barres": [
+    "2135501170001"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "ville"
+  },
+  {
+   "modele": "2172901",
+   "codes_barres": [
+    "2172901190000"
+   ],
+   "saisons": [],
+   "public": [
+    "H"
+   ],
+   "type": "",
+   "photos": 0,
+   "statut": "validé",
+   "famille": ""
+  },
+  {
+   "modele": "2198301",
+   "codes_barres": [
+    "2198301300009"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "E"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "sport"
+  },
+  {
+   "modele": "2202602",
+   "codes_barres": [
+    "2202602380001"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "E"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2203002",
+   "codes_barres": [
+    "2203002090002"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2203101",
+   "codes_barres": [
+    "2203101100008"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2203203",
+   "codes_barres": [
+    "2203203130002"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2207403",
+   "codes_barres": [
+    "2207403090005"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2208902",
+   "codes_barres": [
+    "2208902150009"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2216002",
+   "codes_barres": [
+    "2216002300002"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "E"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2216701",
+   "codes_barres": [
+    "2216701150007"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2217602",
+   "codes_barres": [
+    "2217602170002"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "2217902",
+   "codes_barres": [
+    "2217902090000"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "2218202",
+   "codes_barres": [
+    "2218202090004"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "2218203",
+   "codes_barres": [
+    "2218203090003"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "2224802",
+   "codes_barres": [
+    "2224802130002"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "ville"
+  },
+  {
+   "modele": "2225802",
+   "codes_barres": [
+    "2225802130009"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2228801",
+   "codes_barres": [
+    "2228801110003"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2246101",
+   "codes_barres": [
+    "2246101110004"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2247001",
+   "codes_barres": [
+    "2247001090007"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2249202",
+   "codes_barres": [
+    "2249202130001"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2254601",
+   "codes_barres": [
+    "2254601070001"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "ville"
+  },
+  {
+   "modele": "2254702",
+   "codes_barres": [
+    "2254702090007"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "ville"
+  },
+  {
+   "modele": "2254901",
+   "codes_barres": [
+    "2254901170005"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 5,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2255102",
+   "codes_barres": [
+    "2255102210002"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2255601",
+   "codes_barres": [
+    "2255601050000"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2260802",
+   "codes_barres": [
+    "2260802090007"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2261001",
+   "codes_barres": [
+    "2261001170002"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2269201",
+   "codes_barres": [
+    "2269201110002"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2269703",
+   "codes_barres": [
+    "2269703090000"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2269704",
+   "codes_barres": [
+    "2269704090009"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2270801",
+   "codes_barres": [
+    "2270801090007"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2276701",
+   "codes_barres": [
+    "2276701210002"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "2276801",
+   "codes_barres": [
+    "2276801150000"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "2277001",
+   "codes_barres": [
+    "2277001070006"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "2277502",
+   "codes_barres": [
+    "2277502090008"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2284404",
+   "codes_barres": [
+    "2284404070007"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2285103",
+   "codes_barres": [
+    "2285103160006"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2285105",
+   "codes_barres": [
+    "2285105120008"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2286601",
+   "codes_barres": [
+    "2286601380002"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "E"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2289301",
+   "codes_barres": [
+    "2289301210006"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "2293503",
+   "codes_barres": [
+    "2293503340003"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "E"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2294001",
+   "codes_barres": [
+    "2294001340007"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "E"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2304402",
+   "codes_barres": [
+    "2304402170001"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "2305202",
+   "codes_barres": [
+    "2305202340007"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "E"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "2305301",
+   "codes_barres": [
+    "2305301340007"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "E"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "2305703",
+   "codes_barres": [
+    "2305703110000"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2306902",
+   "codes_barres": [
+    "2306902150002"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2306903",
+   "codes_barres": [
+    "2306903130003"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2307001",
+   "codes_barres": [
+    "2307001150009"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2307602",
+   "codes_barres": [
+    "2307602070003"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2324501",
+   "codes_barres": [
+    "2324501110005"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2328501",
+   "codes_barres": [
+    "2328501090008"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "sport"
+  },
+  {
+   "modele": "2353401",
+   "codes_barres": [
+    "2353401130004"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2353501",
+   "codes_barres": [
+    "2353501090000"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2387102",
+   "codes_barres": [
+    "2387102180006"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2388902",
+   "codes_barres": [
+    "2388902130000"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2394602",
+   "codes_barres": [
+    "2394602190008"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2395401",
+   "codes_barres": [
+    "2395401210003"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2397501",
+   "codes_barres": [
+    "2397501130007"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2398501",
+   "codes_barres": [
+    "2398501090001"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2398502",
+   "codes_barres": [
+    "2398502110005"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2398601",
+   "codes_barres": [
+    "2398601090000"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "ville"
+  },
+  {
+   "modele": "2398901",
+   "codes_barres": [
+    "2398901110002"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2400502",
+   "codes_barres": [
+    "2400502130003"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2400601",
+   "codes_barres": [
+    "2400601050004"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2400801",
+   "codes_barres": [
+    "2400801110003"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2404802",
+   "codes_barres": [
+    "2404802130008"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2405501",
+   "codes_barres": [
+    "2405501070008"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2406201",
+   "codes_barres": [
+    "2406201070008"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2406501",
+   "codes_barres": [
+    "2406501070005"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2406901",
+   "codes_barres": [
+    "2406901090009"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2407001",
+   "codes_barres": [
+    "2407001090005"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2410001",
+   "codes_barres": [
+    "2410001210007"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F",
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2411001",
+   "codes_barres": [
+    "2411001340008"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "E"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2413001",
+   "codes_barres": [
+    "2413001130009"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2413103",
+   "codes_barres": [
+    "2413103090003"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2413301",
+   "codes_barres": [
+    "2413301170002"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2413401",
+   "codes_barres": [
+    "2413401190009"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2414902",
+   "codes_barres": [
+    "2414902170002"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2419001",
+   "codes_barres": [
+    "2419001130001"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2419402",
+   "codes_barres": [
+    "2419402130006"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "2466802",
+   "codes_barres": [
+    "2466802070005"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "ville"
+  },
+  {
+   "modele": "2467401",
+   "codes_barres": [
+    "2467401090005"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2468102",
+   "codes_barres": [
+    "2468102150005"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "ville"
+  },
+  {
+   "modele": "2468301",
+   "codes_barres": [
+    "2468301130006"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2468901",
+   "codes_barres": [
+    "2468901070009"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2469901",
+   "codes_barres": [
+    "2469901110009"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2470401",
+   "codes_barres": [
+    "2470401090005"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2470801",
+   "codes_barres": [
+    "2470801050005"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2474304",
+   "codes_barres": [
+    "2474304070003"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2474403",
+   "codes_barres": [
+    "2474403170000"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2475901",
+   "codes_barres": [
+    "2475901210007"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "2476701",
+   "codes_barres": [
+    "2476701050008"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2476801",
+   "codes_barres": [
+    "2476801050007"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "2486002",
+   "codes_barres": [
+    "2486002130002"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "6813601",
+   "codes_barres": [
+    "6813601210006"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "6961701",
+   "codes_barres": [
+    "6961701190008"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "6961801",
+   "codes_barres": [
+    "6961801150001"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "6962001",
+   "codes_barres": [
+    "6962001190002"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "ville"
+  },
+  {
+   "modele": "9175501",
+   "codes_barres": [
+    "9175501190008"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "9176302",
+   "codes_barres": [
+    "9176302170008"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "ville"
+  },
+  {
+   "modele": "9176901",
+   "codes_barres": [
+    "9176901110009"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "9177001",
+   "codes_barres": [
+    "9177001050004"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "9177801",
+   "codes_barres": [
+    "9177801190009"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "rando"
+  },
+  {
+   "modele": "9178401",
+   "codes_barres": [
+    "9178401150004"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "9178501",
+   "codes_barres": [
+    "9178501090002"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "9178602",
+   "codes_barres": [
+    "9178602150001"
+   ],
+   "saisons": [
+    "P",
+    "E"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basket légère",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "mode"
+  },
+  {
+   "modele": "9398602",
+   "codes_barres": [
+    "9398602090002"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "9399203",
+   "codes_barres": [
+    "9399203130005"
+   ],
+   "saisons": [
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Bottine / montante",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "bottines"
+  },
+  {
+   "modele": "9400503",
+   "codes_barres": [
+    "9400503090002"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "9401401",
+   "codes_barres": [
+    "9401401190009"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "H"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  },
+  {
+   "modele": "9404104",
+   "codes_barres": [
+    "9404104130006"
+   ],
+   "saisons": [
+    "P",
+    "A"
+   ],
+   "public": [
+    "F"
+   ],
+   "type": "Basse mi-saison",
+   "photos": 6,
+   "statut": "validé",
+   "famille": "confort"
+  }
+ ]
+}

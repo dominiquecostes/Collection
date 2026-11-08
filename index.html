@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Collection">
+<title>Collection – catalogue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1f1d1a;--soft:#6b655d;--line:#e7e2da;--bg:#faf8f5;--card:#fff;--acc:#7a4a2a;--accbg:#f3e9e0}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Figtree,system-ui,-apple-system,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer}
+header{position:sticky;top:0;z-index:5;background:rgba(250,248,245,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:14px 20px 12px}
+.top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
+h1{font-size:22px;margin:0;font-weight:700;letter-spacing:-.01em}
+.count{color:var(--soft);font-size:16px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.row+.row{margin-top:10px}
+.lbl{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--soft);width:64px}
+.seg{display:flex;background:#efebe5;border-radius:14px;padding:4px;flex-wrap:wrap}
+.seg button{border:0;background:none;padding:12px 18px;border-radius:11px;font-size:17px;font-weight:500;min-height:48px}
+.seg button.on{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.12);font-weight:700}
+.chip{border:2px solid var(--line);background:#fff;border-radius:999px;padding:10px 20px;font-size:17px;font-weight:500;min-height:48px;display:flex;align-items:center;gap:8px}
+.chip.on{border-color:var(--acc);background:var(--accbg);color:var(--acc);font-weight:700}
+.chip .ck{width:20px;height:20px;border-radius:6px;border:2px solid currentColor;display:inline-flex;align-items:center;justify-content:center;font-size:14px;opacity:.55}
+.chip.on .ck{opacity:1}
+.chip:disabled{opacity:.4}
+.chip small{font-size:14px;opacity:.7}
+.tag.fam{background:var(--accbg);color:var(--acc);font-weight:600}
+#fams .chip{padding:8px 16px;font-size:16px;min-height:44px}
+main{padding:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;padding:0;text-align:left;display:flex;flex-direction:column}
+.card:active{transform:scale(.985)}
+.card .ph{aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:#fff}
+.card img{width:100%;height:100%;object-fit:contain}
+.card .meta{padding:10px 14px 14px;border-top:1px solid #f1ede7}
+.ref{font-weight:700;font-size:18px;letter-spacing:.02em}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.tag{font-size:13px;padding:3px 9px;border-radius:999px;background:#f2eee8;color:var(--soft)}
+.empty{grid-column:1/-1;text-align:center;color:var(--soft);padding:60px 0;font-size:18px}
+.nophoto{color:var(--soft);font-size:15px;text-align:center;padding:20px}
+/* fiche */
+#fiche{position:fixed;inset:0;background:var(--bg);z-index:10;display:none;flex-direction:column}
+#fiche.open{display:flex}
+.fbar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--line);gap:8px}
+.fbar button{border:1px solid var(--line);background:#fff;border-radius:12px;min-height:48px;padding:0 18px;font-size:17px;font-weight:600}
+.fbar .ref{font-size:22px}
+.fbody{flex:1;overflow:auto;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,1fr);gap:0}
+@media (max-width:820px){.fbody{grid-template-columns:1fr}}
+.viewer{background:#fff;display:flex;flex-direction:column;border-right:1px solid var(--line)}
+.stage{position:relative;flex:1;min-height:52vh;display:flex;align-items:center;justify-content:center;touch-action:pan-y}
+.stage img{max-width:100%;max-height:68vh;object-fit:contain;user-select:none;-webkit-user-drag:none}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:56px;height:56px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.92);font-size:26px;display:flex;align-items:center;justify-content:center}
+.nav.l{left:12px}.nav.r{right:12px}
+.thumbs{display:flex;gap:8px;padding:12px;overflow-x:auto;border-top:1px solid #f1ede7}
+.thumbs button{flex:0 0 auto;width:78px;height:78px;border:2px solid transparent;border-radius:12px;background:#fff;padding:2px}
+.thumbs button.on{border-color:var(--acc)}
+.thumbs img{width:100%;height:100%;object-fit:contain}
+.side{padding:20px 22px 40px}
+.side h2{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--soft);margin:22px 0 10px;font-weight:600}
+.side h2:first-child{margin-top:0}
+table{width:100%;border-collapse:collapse;font-size:17px;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+td{padding:13px 14px;border-bottom:1px solid #f1ede7;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td:first-child{color:var(--soft);width:42%}
+td.todo{color:#b3aca2;font-style:italic}
+.note{font-size:14px;color:var(--soft);margin-top:10px;line-height:1.45}
+.big .tag{font-size:15px;padding:6px 12px}
+.edbtn{margin-top:12px;border:1px solid var(--line);background:#fff;border-radius:12px;min-height:48px;padding:0 18px;font-size:16px;font-weight:600}
+.edbtn.pri{background:var(--acc);color:#fff;border-color:var(--acc)}
+.edl{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--soft);margin:14px 0 6px}
+.edrow{display:flex;gap:8px;flex-wrap:wrap}
+.edrow .chip{padding:8px 14px;font-size:15px;min-height:44px}
+#ed{background:#fff;border:1px solid var(--line);border-radius:14px;padding:4px 14px 12px;margin-top:12px}
+.hbtn{border:1px solid var(--acc);background:var(--acc);color:#fff;border-radius:12px;min-height:44px;padding:0 16px;font-size:16px;font-weight:600}
+.top .r{display:flex;gap:14px;align-items:center}
+.tag.new{background:#e5f0e4;color:#2f6b2a;font-weight:600}
+.tag.out{background:#f6e2e0;color:#9a3b30;font-weight:600}
+.foot{grid-column:1/-1;text-align:center;padding:10px 0 30px}
+.foot button{border:1px solid var(--line);background:#fff;border-radius:12px;min-height:44px;padding:0 18px;font-size:15px;color:var(--soft)}
+.banner{grid-column:1/-1;background:#f6e2e0;color:#9a3b30;border-radius:14px;padding:14px 18px;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.banner button{border:1px solid currentColor;background:#fff;color:inherit;border-radius:10px;min-height:40px;padding:0 14px;font-weight:600}
+.edbtn.danger{color:#9a3b30;border-color:#e6c3bd}
+.sec{margin-top:18px;padding-top:14px;border-top:1px solid #f1ede7}
+.phl{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.phl div{position:relative;width:76px;height:76px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.phl img{width:100%;height:100%;object-fit:contain}
+.phl button{position:absolute;top:-8px;right:-8px;width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:14px;line-height:1;padding:0}
+.file{display:inline-flex;align-items:center;gap:8px;margin-top:10px;border:1px dashed var(--acc);color:var(--acc);border-radius:12px;min-height:48px;padding:0 18px;font-size:16px;font-weight:600;cursor:pointer}
+.file input{display:none}
+.confirm{background:#fff7f5;border:1px solid #e6c3bd;border-radius:12px;padding:12px 14px;margin-top:10px}
+#add{position:fixed;inset:0;background:rgba(31,29,26,.45);z-index:20;display:none;align-items:flex-start;justify-content:center;overflow:auto;padding:30px 14px}
+#add.open{display:flex}
+.panel{background:var(--bg);border-radius:20px;max-width:640px;width:100%;padding:20px 22px 24px}
+.panel h3{margin:0 0 6px;font-size:22px}
+.ftr{display:grid;grid-template-columns:1fr 1.3fr 44px;gap:6px;margin-bottom:6px}
+.ftr input{font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;min-width:0}
+.ftr button{border:1px solid var(--line);background:#fff;border-radius:10px;font-size:16px}
+#fted{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:12px}
+.panel input[type=text]{width:100%;font:inherit;font-size:20px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;letter-spacing:.04em}
+body.apercu #addbtn,body.apercu #edbtn,body.apercu #ftbtn,body.apercu #ed,body.apercu #fted,body.apercu #seeout{display:none!important}
+#apbar[hidden]{display:none!important}
+#apbar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:#2f4a3a;color:#fff;padding:10px 16px;display:flex;gap:12px;align-items:center;justify-content:center;font-size:15px}
+#apbar button{border:0;border-radius:10px;min-height:40px;padding:0 14px;font-size:15px;font-weight:600;background:#fff;color:#2f4a3a}
+body.apercu{padding-bottom:64px}
+@media (max-width:900px),(max-height:700px){header{position:static}}
+@media (max-width:600px){.top{flex-wrap:wrap;gap:8px}.top .r{flex-wrap:wrap;gap:8px;width:100%;justify-content:flex-start}.hbtn{white-space:nowrap;padding:0 12px;min-height:40px;font-size:14px}header{padding:12px 14px 10px}}
+#gogrid{display:none;width:100%;margin-top:12px}
+@media (max-width:900px){#gogrid{display:block}}
+@media (max-width:600px){#grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;padding:12px!important}.card .meta{padding:8px!important}.card .ref{font-size:15px!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="top"><h1>Collection</h1><span class="r"><span class="count" id="count"></span><button class="hbtn" id="apbtn" hidden>Aperçu tablette</button><button class="hbtn" id="addbtn" hidden>+ Ajouter un modèle</button></span></div>
+  <div class="row"><span class="lbl">Saison</span><div class="seg" id="seas"></div></div>
+  <div class="row"><span class="lbl">Pour</span><div class="row" id="pubs" style="margin:0"></div></div>
+  <div class="row"><span class="lbl">Type</span><div class="row" id="fams" style="margin:0"></div></div>
+  <button id="gogrid" class="hbtn">Voir les modèles ↓</button>
+</header>
+<main id="grid"></main>
+
+<div id="fiche" role="dialog" aria-modal="true">
+  <div class="fbar">
+    <button id="close">← Retour</button>
+    <span class="ref" id="fref"></span>
+    <span class="row" style="margin:0"><button id="prev" aria-label="Modèle précédent">‹</button><button id="next" aria-label="Modèle suivant">›</button></span>
+  </div>
+  <div class="fbody">
+    <div class="viewer">
+      <div class="stage" id="stage">
+        <button class="nav l" id="pl" aria-label="Photo précédente">‹</button>
+        <img id="big" alt="">
+        <button class="nav r" id="pr" aria-label="Photo suivante">›</button>
+      </div>
+      <div class="thumbs" id="thumbs"></div>
+    </div>
+    <div class="side">
+      <h2>Classement</h2>
+      <div class="tags big" id="ftags"></div>
+      <button class="edbtn" id="edbtn" hidden>Modifier le modèle</button>
+      <div id="ed" hidden>
+        <div class="edl">Type</div><div class="edrow" id="edf"></div>
+        <div class="edl">Saison</div><div class="edrow" id="eds"></div>
+        <div class="edl">Pour</div><div class="edrow" id="edp"></div>
+        <div class="edrow" style="margin-top:14px"><button class="edbtn pri" id="edok">Enregistrer</button><button class="edbtn" id="edno">Fermer</button></div>
+        <div class="sec">
+          <div class="edl" style="margin-top:0">Photos ajoutées</div>
+          <div class="phl" id="edph"></div>
+          <label class="file">＋ Ajouter des photos<input type="file" id="edfile" accept="image/*" multiple></label>
+        </div>
+        <div class="sec" id="rmbox"></div>
+        <p class="note" id="edmsg"></p>
+      </div>
+      <h2>Fiche technique</h2>
+      <table id="ftech"></table>
+      <p class="note" id="fnote"></p>
+      <button class="edbtn" id="ftbtn" hidden>Modifier la fiche technique</button>
+      <div id="fted" hidden>
+        <div id="ftrows"></div>
+        <button class="edbtn" id="ftadd">＋ Ajouter une pièce</button>
+        <div class="edrow" style="margin-top:12px"><button class="edbtn pri" id="ftok">Enregistrer</button><button class="edbtn" id="ftno">Annuler</button></div>
+        <p class="note" id="ftmsg"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="add" role="dialog" aria-modal="true">
+  <div class="panel">
+    <h3>Nouveau modèle</h3>
+    <div class="edl">Référence du modèle (7 chiffres)</div>
+    <input type="text" id="aref" inputmode="numeric" maxlength="7" autocomplete="off">
+    <div class="edl">Type</div><div class="edrow" id="af"></div>
+    <div class="edl">Saison</div><div class="edrow" id="as"></div>
+    <div class="edl">Pour</div><div class="edrow" id="ap"></div>
+    <div class="edl">Photos</div>
+    <div class="phl" id="aph"></div>
+    <label class="file">＋ Choisir des photos<input type="file" id="afile" accept="image/*" multiple></label>
+    <div class="edrow" style="margin-top:18px"><button class="edbtn pri" id="aok">Ajouter au catalogue</button><button class="edbtn" id="ano">Annuler</button></div>
+    <p class="note" id="amsg"></p>
+  </div>
+</div>
+
+<div id="apbar" hidden>Aperçu : ce que verront les collègues sur leur tablette (consultation seule) <button id="apoff">Quitter l'aperçu</button></div>
+<script>
+const SEASONS=[['T','Toute la collection'],['P','Printemps'],['E','Été'],['A','Automne-Hiver']];
+const PUBS=[['F','Femme'],['H','Homme'],['E','Enfant']];
+let FN={};const SN={P:'Printemps',E:'Été',A:'Automne-Hiver'}, PN={F:'Femme',H:'Homme',E:'Enfant'};
+let PIECES=['Empeigne','Quartiers','Languette','Doublure','Première de propreté','Semelle'];
+let FDB={};let FAMS=[],fams=new Set(),BASE=[],DATA=[],FICHES={},TH={},PH={},EX={},CORR={},ADDS={},season='T',pubs=new Set(),list=[],cur=-1,ph=0,showOut=false,DB=null;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+const arr=(a,ok)=>Array.isArray(a)?a.filter(x=>ok.includes(x)):null;
+
+// ---------- données : base + ajouts + corrections ----------
+function rebuild(){
+  const out=[];
+  const add=(d)=>{const c=CORR[d.modele]||{};const x={...d};
+    if(typeof c.famille==='string')x.famille=c.famille;
+    const s=arr(c.saisons,['P','E','A']);if(s)x.saisons=s;
+    const p=arr(c.public,['F','H','E']);if(p)x.public=p;
+    x.retire=!!c.retire;out.push(x)};
+  BASE.forEach(add);
+  Object.values(ADDS).forEach(a=>{if(!a||!/^\d{7}$/.test(a.modele)||BASE.some(b=>b.modele===a.modele))return;
+    add({modele:a.modele,famille:a.famille||'',saisons:arr(a.saisons,['P','E','A'])||[],public:arr(a.public,['F','H','E'])||[],photos:0,vignette:a.vignette||'',nouveau:true,ajoute_le:a.ajoute_le||''})});
+  out.sort((a,b)=>a.modele.localeCompare(b.modele));
+  DATA=out;
+}
+const HASJPG=new Set();
+function thumbOf(d){return TH[d.modele]||d.vignette||(HASJPG.has(d.modele)?'t/'+d.modele+'.jpg':'')}
+function photosOf(d){return [...(PH[d.modele]||[]),...((EX[d.modele]||[]).map(e=>e.data))]}
+
+// ---------- filtres et grille ----------
+function renderFilters(){
+  const vis=DATA.filter(d=>!d.retire);
+  $('seas').innerHTML=SEASONS.map(([k,l])=>`<button data-s="${k}" class="${season===k?'on':''}">${l}</button>`).join('');
+  $('fams').innerHTML=FAMS.map(k=>{const n=vis.filter(d=>d.famille===k).length;return `<button class="chip ${fams.has(k)?'on':''}" data-f="${k}" ${n?'':'disabled'}><span class="ck">${fams.has(k)?'✓':''}</span>${FN[k]} <small>${n}</small></button>`}).join('');
+  $('pubs').innerHTML=PUBS.map(([k,l])=>`<button class="chip ${pubs.has(k)?'on':''}" data-p="${k}"><span class="ck">${pubs.has(k)?'✓':''}</span>${l}</button>`).join('');
+}
+function filtered(){
+  return DATA.filter(d=>(showOut?d.retire:!d.retire)&&(fams.size===0||fams.has(d.famille))&&(season==='T'||d.saisons.includes(season))&&(pubs.size===0||d.public.some(p=>pubs.has(p))));
+}
+function tags(d){return (d.nouveau?'<span class="tag new">Nouveau</span>':'')+(d.retire?'<span class="tag out">Retiré</span>':'')+(d.famille&&FN[d.famille]?`<span class="tag fam">${FN[d.famille]}</span>`:'')+d.saisons.map(s=>`<span class="tag">${SN[s]}</span>`).join('')+d.public.map(p=>`<span class="tag">${PN[p]}</span>`).join('')}
+let dirty=false;
+function renderGrid(){
+  if($('fiche').classList.contains('open')){dirty=true;return}
+  dirty=false;
+  list=filtered();
+  const nOut=DATA.filter(d=>d.retire).length;
+  $('gogrid').textContent='Voir les '+list.length+' modèle'+(list.length>1?'s':'')+' ↓';
+  $('count').textContent=list.length+' modèle'+(list.length>1?'s':'')+(showOut?' retiré'+(list.length>1?'s':''):'');
+  let h=showOut?`<div class="banner">Modèles retirés du catalogue<button id="back">Revenir au catalogue</button></div>`:'';
+  h+=list.length?list.map((d,i)=>{const t=thumbOf(d);return `<button class="card" data-i="${i}"><div class="ph">${t?`<img src="${t}" loading="lazy" alt="Modèle ${d.modele}">`:'<div class="nophoto">Photo à venir</div>'}</div><div class="meta"><div class="ref">${d.modele}</div><div class="tags">${tags(d)}</div></div></button>`}).join(''):'<div class="empty">Aucun modèle pour ce choix.</div>';
+  if(!showOut&&nOut)h+=`<div class="foot"><button id="seeout">Voir les modèles retirés (${nOut})</button></div>`;
+  $('grid').innerHTML=h;
+}
+function refresh(){rebuild();renderFilters();renderGrid()}
+function save(){store('cat-f',JSON.stringify({season,pubs:[...pubs],fams:[...fams]}))}
+$('fams').onclick=e=>{const b=e.target.closest('button');if(!b||b.disabled)return;const k=b.dataset.f;fams.has(k)?fams.delete(k):fams.add(k);renderFilters();renderGrid();save()};
+$('seas').onclick=e=>{const b=e.target.closest('button');if(!b)return;season=b.dataset.s;renderFilters();renderGrid();save()};
+$('pubs').onclick=e=>{const b=e.target.closest('button');if(!b)return;const k=b.dataset.p;pubs.has(k)?pubs.delete(k):pubs.add(k);renderFilters();renderGrid();save()};
+$('grid').onclick=e=>{
+  if(e.target.closest('#seeout')){showOut=true;renderGrid();scrollTo(0,0);return}
+  if(e.target.closest('#back')){showOut=false;renderGrid();return}
+  const b=e.target.closest('.card');if(b)open(+b.dataset.i)};
+
+// ---------- fiche ----------
+function open(i){
+  cur=(i+list.length)%list.length;ph=0;const d=list[cur];
+  $('fref').textContent='Modèle '+d.modele;
+  $('ftags').innerHTML=tags(d);closeEd();
+  drawFiche();
+  $('thumbs').innerHTML='';showPh();$('fiche').classList.add('open');$('fiche').querySelector('.fbody').scrollTop=0;
+  loadPh(d);
+}
+async function loadPh(d){
+  const jobs=[];
+  if(d.photos&&!PH[d.modele])jobs.push(fetch('m/'+d.modele+'.json').then(r=>r.json()).then(a=>{PH[d.modele]=a}).catch(()=>{}));
+  if(DB)jobs.push(DB.collection('photos').where('modele','==',d.modele).get().then(s=>{EX[d.modele]=s.docs.map(x=>({id:x.id,...x.data()})).filter(x=>typeof x.data==='string'&&x.data.startsWith('data:image/')).sort((a,b)=>(a.ordre||0)-(b.ordre||0))}).catch(()=>{}));
+  await Promise.all(jobs);
+  if(list[cur]!==d)return;
+  drawThumbs();showPh();if(!$('ed').hidden)drawEdPh();
+}
+function drawThumbs(){const P=photosOf(list[cur]);$('thumbs').innerHTML=P.length>1?P.map((u,k)=>`<button data-k="${k}"><img src="${u}" alt="Vue ${k+1}"></button>`).join(''):''}
+function showPh(){
+  const d=list[cur];const P=photosOf(d);const n=P.length;
+  $('pl').style.display=$('pr').style.display=n>1?'':'none';
+  if(!n){const t=thumbOf(d);if(t){$('big').src=t;$('big').alt='Modèle '+d.modele}else{$('big').removeAttribute('src');$('big').alt='Photo à venir'}return}
+  ph=(ph+n)%n;$('big').src=P[ph];$('big').alt=`Modèle ${d.modele}, vue ${ph+1}`;
+  [...$('thumbs').children].forEach((b,k)=>b.classList.toggle('on',k===ph));
+}
+$('thumbs').onclick=e=>{const b=e.target.closest('button');if(b){ph=+b.dataset.k;showPh()}};
+$('pl').onclick=()=>{ph--;showPh()};$('pr').onclick=()=>{ph++;showPh()};
+$('prev').onclick=()=>open(cur-1);$('next').onclick=()=>open(cur+1);
+$('close').onclick=()=>{$('fiche').classList.remove('open');if(dirty)renderGrid()};
+let sx=null;
+$('stage').addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+$('stage').addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40){ph+=dx<0?1:-1;showPh()}sx=null});
+document.addEventListener('keydown',e=>{if(!$('fiche').classList.contains('open'))return;if(e.key==='Escape')$('close').click();if(e.key==='ArrowRight'){ph++;showPh()}if(e.key==='ArrowLeft'){ph--;showPh()}});
+
+// ---------- fiche technique ----------
+function ficheOf(d){const x=FDB[d.modele];if(x&&Array.isArray(x.pieces))return x;return FICHES[d.modele]||{}}
+function piecesOf(d){const f=ficheOf(d);return (f.pieces&&f.pieces.length)?f.pieces.filter(p=>p&&typeof p.piece==='string'):PIECES.map(p=>({piece:p,matiere:''}))}
+function drawFiche(){const d=list[cur];if(!d)return;const f=ficheOf(d);
+  $('ftech').innerHTML=piecesOf(d).map(p=>`<tr><td>${esc(p.piece)}</td><td class="${p.matiere?'':'todo'}">${esc(p.matiere||'à renseigner')}</td></tr>`).join('');
+  $('fnote').textContent=FDB[d.modele]?'Fiche corrigée.':(f.pieces&&f.pieces.length?(f.remarque||''):'Les matières seront ajoutées à partir de vos fiches techniques.');
+  $('fted').hidden=true;$('ftbtn').hidden=!DB;$('ftmsg').textContent=''}
+let FT=[];
+function drawFtRows(){$('ftrows').innerHTML='<div class="ftr"><span class="edl" style="margin:0">Pièce</span><span class="edl" style="margin:0">Matière</span><span></span></div>'+FT.map((p,k)=>`<div class="ftr"><input data-k="${k}" data-f="piece" value="${esc(p.piece)}" placeholder="Nom de la pièce"><input data-k="${k}" data-f="matiere" value="${esc(p.matiere)}" placeholder="Matière"><button data-k="${k}" aria-label="Supprimer la pièce">✕</button></div>`).join('')}
+$('ftbtn').onclick=()=>{FT=piecesOf(list[cur]).map(p=>({piece:p.piece,matiere:p.matiere||''}));drawFtRows();$('fted').hidden=false;$('ftbtn').hidden=true};
+$('ftrows').oninput=e=>{const i=e.target;if(i.dataset.k!==undefined&&i.dataset.f)FT[+i.dataset.k][i.dataset.f]=i.value};
+$('ftrows').onclick=e=>{const b=e.target.closest('button');if(b){FT.splice(+b.dataset.k,1);drawFtRows()}};
+$('ftadd').onclick=()=>{FT.push({piece:'',matiere:''});drawFtRows();const ins=$('ftrows').querySelectorAll('input[data-f=piece]');ins[ins.length-1].focus()};
+$('ftno').onclick=()=>drawFiche();
+$('ftok').onclick=async()=>{const d=list[cur];const pieces=FT.map(p=>({piece:p.piece.trim(),matiere:p.matiere.trim()})).filter(p=>p.piece);
+  $('ftok').disabled=true;$('ftmsg').textContent='Enregistrement…';
+  try{const doc={pieces,modifie_le:new Date().toISOString()};await DB.doc('fiches/'+d.modele).set(doc);FDB[d.modele]=doc;drawFiche();$('fnote').textContent='Fiche enregistrée.'}
+  catch(e){$('ftmsg').textContent=errMsg(e)}$('ftok').disabled=false};
+
+// ---------- photos : réduction avant envoi ----------
+function loadImg(file){return new Promise((ok,ko)=>{const u=URL.createObjectURL(file);const im=new Image();im.onload=()=>{ok(im)};im.onerror=ko;im.src=u})}
+function toJpeg(im,max,q){const s=Math.min(1,max/Math.max(im.naturalWidth,im.naturalHeight));const c=document.createElement('canvas');c.width=Math.round(im.naturalWidth*s);c.height=Math.round(im.naturalHeight*s);const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);return c.toDataURL('image/jpeg',q)}
+async function prep(file){const im=await loadImg(file);let q=.75,max=1000,u=toJpeg(im,max,q);while(u.length>240000&&max>500){max-=150;q=Math.max(.55,q-.05);u=toJpeg(im,max,q)}return {big:u,thumb:toJpeg(im,420,.7)}}
+async function savePhotos(modele,files,start,msgEl){
+  let n=0;
+  for(const f of files){msgEl.textContent=`Envoi des photos… ${n+1}/${files.length}`;
+    const p=await prep(f);await DB.collection('photos').doc(`${modele}_${Date.now()}_${n}`).set({modele,data:p.big,ordre:start+n,ajoute_le:new Date().toISOString()});n++}
+  return n;
+}
+
+// ---------- modifier un modèle ----------
+let ED=null,rmAsk=false;
+function closeEd(){$('ed').hidden=true;$('edbtn').hidden=!DB;$('edmsg').textContent='';rmAsk=false}
+function chips(el,keys,names,on){el.innerHTML=keys.map(k=>`<button class="chip ${on(k)?'on':''}" data-k="${k}">${names[k]}</button>`).join('')}
+function chipsEd(){chips($('edf'),FAMS,FN,k=>ED.famille===k);chips($('eds'),Object.keys(SN),SN,k=>ED.saisons.includes(k));chips($('edp'),Object.keys(PN),PN,k=>ED.public.includes(k))}
+function tog(a,k){return a.includes(k)?a.filter(x=>x!==k):[...a,k]}
+function drawEdPh(){const E=EX[list[cur].modele]||[];$('edph').innerHTML=E.length?E.map(e=>`<div><img src="${e.data}" alt=""><button data-id="${esc(e.id)}" aria-label="Supprimer la photo">✕</button></div>`).join(''):'<span class="note" style="margin:0">Aucune pour l\'instant.</span>'}
+function drawRm(){const d=list[cur];
+  $('rmbox').innerHTML=d.retire?`<button class="edbtn" id="rmback">Remettre dans le catalogue</button>`:
+   rmAsk?`<div class="confirm">Retirer le modèle ${d.modele} du catalogue ? Il restera visible dans « Modèles retirés » et pourra y être remis.<div class="edrow" style="margin-top:6px"><button class="edbtn danger" id="rmyes">Oui, retirer</button><button class="edbtn" id="rmno">Non</button></div></div>`:
+   `<button class="edbtn danger" id="rmask">Retirer ce modèle du catalogue</button>`}
+$('edbtn').onclick=()=>{const d=list[cur];ED={famille:d.famille,saisons:[...d.saisons],public:[...d.public]};chipsEd();drawEdPh();drawRm();$('ed').hidden=false;$('edbtn').hidden=true};
+$('edno').onclick=closeEd;
+$('edf').onclick=e=>{const b=e.target.closest('button');if(b){ED.famille=b.dataset.k;chipsEd()}};
+$('eds').onclick=e=>{const b=e.target.closest('button');if(b){ED.saisons=tog(ED.saisons,b.dataset.k);chipsEd()}};
+$('edp').onclick=e=>{const b=e.target.closest('button');if(b){ED.public=tog(ED.public,b.dataset.k);chipsEd()}};
+function errMsg(e){return e&&e.code==='invalid_argument'?'Vous n\'avez pas le droit de modifier ce catalogue.':e&&e.code==='quota_exceeded'?'Espace de stockage plein : retirez des photos ajoutées.':'Échec de l\'enregistrement, réessayez.'}
+async function writeCorr(d,extra){const c={...(CORR[d.modele]||{}),...extra,modifie_le:new Date().toISOString()};await DB.doc('corrections/'+d.modele).set(c);CORR[d.modele]=c}
+$('edok').onclick=async()=>{const d=list[cur];$('edok').disabled=true;$('edmsg').textContent='Enregistrement…';
+  try{await writeCorr(d,{famille:ED.famille,saisons:ED.saisons,public:ED.public});Object.assign(d,{famille:ED.famille,saisons:ED.saisons,public:ED.public});$('ftags').innerHTML=tags(d);rebuild();renderFilters();dirty=true;$('edmsg').textContent='Enregistré.'}
+  catch(e){$('edmsg').textContent=errMsg(e)}$('edok').disabled=false};
+$('rmbox').onclick=async e=>{const d=list[cur];const id=e.target.id;
+  if(id==='rmask'){rmAsk=true;drawRm();return}if(id==='rmno'){rmAsk=false;drawRm();return}
+  if(id==='rmyes'||id==='rmback'){const r=id==='rmyes';$('edmsg').textContent='Enregistrement…';
+    try{await writeCorr(d,{retire:r});d.retire=r;rmAsk=false;rebuild();renderFilters();dirty=true;$('ftags').innerHTML=tags(d);drawRm();$('edmsg').textContent=r?'Modèle retiré du catalogue.':'Modèle remis dans le catalogue.'}
+    catch(err){$('edmsg').textContent=errMsg(err)}}};
+$('edfile').onchange=async e=>{const files=[...e.target.files];e.target.value='';if(!files.length)return;const d=list[cur];
+  try{const n=await savePhotos(d.modele,files,(EX[d.modele]||[]).length,$('edmsg'));
+    if(!d.photos&&!thumbOf(d)&&ADDS[d.modele]){}
+    $('edmsg').textContent=n+' photo'+(n>1?'s':'')+' ajoutée'+(n>1?'s':'')+'.';await loadPh(d)}
+  catch(err){$('edmsg').textContent=errMsg(err)}};
+$('edph').onclick=async e=>{const b=e.target.closest('button');if(!b)return;const d=list[cur];
+  try{await DB.doc('photos/'+b.dataset.id).delete();EX[d.modele]=(EX[d.modele]||[]).filter(x=>x.id!==b.dataset.id);ph=0;drawThumbs();showPh();drawEdPh()}catch(err){$('edmsg').textContent=errMsg(err)}};
+
+// ---------- ajouter un modèle ----------
+let AD=null;
+function chipsAd(){chips($('af'),FAMS,FN,k=>AD.famille===k);chips($('as'),Object.keys(SN),SN,k=>AD.saisons.includes(k));chips($('ap'),Object.keys(PN),PN,k=>AD.public.includes(k));
+  $('aph').innerHTML=AD.previews.map((u,k)=>`<div><img src="${u}" alt=""><button data-k="${k}" aria-label="Enlever">✕</button></div>`).join('')}
+$('addbtn').onclick=()=>{AD={famille:'',saisons:[],public:[],files:[],previews:[]};$('aref').value='';$('amsg').textContent='';chipsAd();$('add').classList.add('open')};
+$('ano').onclick=()=>$('add').classList.remove('open');
+$('af').onclick=e=>{const b=e.target.closest('button');if(b){AD.famille=b.dataset.k;chipsAd()}};
+$('as').onclick=e=>{const b=e.target.closest('button');if(b){AD.saisons=tog(AD.saisons,b.dataset.k);chipsAd()}};
+$('ap').onclick=e=>{const b=e.target.closest('button');if(b){AD.public=tog(AD.public,b.dataset.k);chipsAd()}};
+$('afile').onchange=e=>{for(const f of e.target.files){AD.files.push(f);AD.previews.push(URL.createObjectURL(f))}e.target.value='';chipsAd()};
+$('aph').onclick=e=>{const b=e.target.closest('button');if(!b)return;const k=+b.dataset.k;AD.files.splice(k,1);AD.previews.splice(k,1);chipsAd()};
+$('aok').onclick=async()=>{
+  const ref=$('aref').value.trim();
+  if(!/^\d{7}$/.test(ref)){$('amsg').textContent='La référence doit faire 7 chiffres.';return}
+  const ex=DATA.find(d=>d.modele===ref);
+  if(ex){$('amsg').textContent=ex.retire?'Ce modèle existe déjà dans « Modèles retirés » : ouvrez-le pour le remettre.':'Ce modèle existe déjà dans le catalogue.';return}
+  if(!AD.famille){$('amsg').textContent='Choisissez un type.';return}
+  if(!AD.saisons.length||!AD.public.length){$('amsg').textContent='Choisissez au moins une saison et un public.';return}
+  $('aok').disabled=true;
+  try{let vign='';
+    if(AD.files.length){$('amsg').textContent='Préparation des photos…';vign=(await prep(AD.files[0])).thumb}
+    const doc={modele:ref,famille:AD.famille,saisons:AD.saisons,public:AD.public,vignette:vign,ajoute_le:new Date().toISOString()};
+    await DB.doc('ajouts/'+ref).set(doc);ADDS[ref]=doc;
+    if(AD.files.length)await savePhotos(ref,AD.files,0,$('amsg'));
+    $('add').classList.remove('open');showOut=false;refresh();
+    const i=list.findIndex(d=>d.modele===ref);if(i>=0)open(i);
+  }catch(e){$('amsg').textContent=errMsg(e)}
+  $('aok').disabled=false};
+
+function setAp(on){document.body.classList.toggle('apercu',on);$('apbar').hidden=!on;$('apbtn').hidden=on||!DB;if(on){showOut=false}renderGrid()}
+$('gogrid').onclick=()=>$('grid').scrollIntoView({behavior:'smooth'});
+$('apbtn').onclick=()=>setAp(true);$('apoff').onclick=()=>setAp(false);
+// ---------- base partagée ----------
+async function initDb(){
+  try{DB=window.claude&&await window.claude.use('db')}catch(e){DB=null}
+  if(!DB)return;
+  $('addbtn').hidden=false;$('apbtn').hidden=false;if($('fiche').classList.contains('open')){if($('ed').hidden)$('edbtn').hidden=false;if($('fted').hidden)$('ftbtn').hidden=false}
+  DB.collection('corrections').onSnapshot(s=>{const m={};s.docs.forEach(d=>{m[d.id]=d.data()||{}});CORR=m;refresh()},()=>{});
+  DB.collection('fiches').onSnapshot(s=>{const m={};s.docs.forEach(d=>{m[d.id]=d.data()||{}});FDB=m;if($('fiche').classList.contains('open')&&$('fted').hidden)drawFiche()},()=>{});
+  DB.collection('ajouts').onSnapshot(s=>{const m={};s.docs.forEach(d=>{const x=d.data()||{};if(x.modele===d.id)m[d.id]=x});ADDS=m;refresh()},()=>{});
+}
+
+(async()=>{
+  try{const s=JSON.parse(store('cat-f')||'null');if(s){season=s.season||'T';pubs=new Set(s.pubs||[]);fams=new Set(s.fams||[])}}catch(e){}
+  renderFilters();
+  const inl=id=>{const e=document.getElementById(id);return e?JSON.parse(e.textContent):null};
+  const TI=inl('d-vign');if(TI)TH=TI;
+  const j=inl('d-modeles')||await (await fetch('data/modeles.json')).json();
+  BASE=j.modeles;BASE.forEach(d=>{if(d.photos&&(d.photos.length||d.photos>0))HASJPG.add(d.modele)});FN=j.legende.familles||{};FAMS=Object.keys(FN);if(j.pieces_par_defaut)PIECES=j.pieces_par_defaut;
+  const FI=inl('d-fiches');if(FI)FICHES=FI.fiches||{};else try{const f=await fetch('data/fiches.json');if(f.ok){const fj=await f.json();FICHES=fj.fiches||{}}}catch(e){}
+  refresh();
+  initDb();
+})().catch(()=>{$('grid').innerHTML='<div class="empty">Le catalogue n\'a pas pu se charger. Vérifiez la connexion Internet.</div>'});
+if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){navigator.serviceWorker.register('sw.js').catch(()=>{});
+  const chk=async()=>{try{const ks=await caches.keys();for(const k of ks){const c=await caches.open(k);if((await c.keys()).length>=360){if(!document.getElementById('offok'))$('count').insertAdjacentHTML('afterend','<span id="offok" class="count" style="color:#2f6b2a">✓ hors ligne</span>');return}}}catch(e){}setTimeout(chk,5000)};chk()}
+</script>
+</body>
+</html>
