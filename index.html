@@ -66,6 +66,11 @@ main{padding:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(230
 .side{padding:20px 22px 40px}
 .side h2{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--soft);margin:22px 0 10px;font-weight:600}
 #eleg{padding:10px 16px 14px;border-top:1px solid var(--line);font-size:15px}#eleg .eh{font-weight:700;margin-bottom:6px}#eleg td{padding:3px 12px 3px 0;vertical-align:top}#eleg td:first-child{font-weight:600}
+#eguide .gstep{color:var(--soft);font-size:14px;margin-top:6px}#eguide .gq{font-size:20px;font-weight:700;margin:8px 0 12px;line-height:1.3}
+#eguide .gm{display:flex;flex-wrap:wrap;gap:8px}#eguide .gm .edbtn{margin-top:0;min-height:46px}
+#eguide .gsws{display:flex;flex-wrap:wrap;gap:4px}#eguide .gsw{display:flex;flex-direction:column;align-items:center;width:78px;font-size:12px;text-align:center;line-height:1.2;gap:4px;margin-bottom:6px}
+#eguide .gsw button{width:58px;height:58px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);padding:0;cursor:pointer}
+#eguide .edrow{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}#eguide .edrow .edbtn{margin-top:0}
 #essai .zl{font-size:14px;font-weight:600;margin:12px 0 6px}
 #essai .mt{border:1px solid var(--line);background:#fff;border-radius:10px;min-height:40px;padding:0 10px;font-size:16px;margin:0 0 8px;color:inherit}
 #essai .sw{display:flex;flex-wrap:wrap;gap:8px}
@@ -169,6 +174,8 @@ body.apercu{padding-bottom:64px}
       </div>
       <div id="essai" hidden>
         <h2>Essayer une matière</h2>
+        <button class="edbtn pri" id="egbtn">Mode guidé, pièce par pièce</button>
+        <div id="eguide" hidden></div>
         <div id="ezones"></div>
         <button class="edbtn" id="eorig">Photo d’origine</button>
         <p class="note" id="enote">Coloris et motifs relevés sur vos cartes matière. Le rendu à l’écran reste indicatif.</p>
@@ -277,10 +284,31 @@ function zoneHtml(k){const t=TEINTES[list[cur].modele],z=t.zones[k],m=TMAT[k]||'
 function drawLeg(){const d=list[cur];const t=d&&TEINTES[d.modele];const ks=t?Object.keys(TSEL):[];$('eleg').hidden=!ks.length;if(!ks.length)return;
   $('elegt').innerHTML=t.zones.map((z,k)=>{const x=TSEL[k];let m='d’origine',c='';if(x){const i=x.nom.lastIndexOf(' ');const mat=Object.keys(NUAN).find(n=>x.nom.startsWith(n+' '));m=mat||x.nom;c=mat?x.nom.slice(mat.length+1):''}return `<tr><td>${esc(z.piece)}</td><td>${esc(m)}</td><td>${esc(c)}</td></tr>`}).join('')}
 function drawZones(){const t=TEINTES[list[cur].modele];$('ezones').innerHTML=t.zones.map((z,k)=>`<div data-zk="${k}">${zoneHtml(k)}</div>`).join('')}
-function drawEssai(){const d=list[cur];const t=d&&TEINTES[d.modele];TSEL={};TURL=null;$('eleg').hidden=true;for(const k in TMAT)delete TMAT[k];$('essai').hidden=!t;if(t)drawZones()}
+function drawEssai(){const d=list[cur];const t=d&&TEINTES[d.modele];TSEL={};TURL=null;$('eleg').hidden=true;G=null;if(typeof gDraw==='function')gDraw();for(const k in TMAT)delete TMAT[k];$('essai').hidden=!t;if(t)drawZones()}
 $('ezones').onchange=e=>{const t=e.target;if(t.dataset.mk===undefined)return;TMAT[t.dataset.mk]=t.value;t.closest('[data-zk]').innerHTML=zoneHtml(t.dataset.mk)};
 $('ezones').onclick=e=>{const b=e.target.closest('button');if(!b)return;const w=b.closest('[data-zk]'),k=w.dataset.zk;
   if(b.dataset.c)TSEL[k]={c:b.dataset.c,nom:b.dataset.nm,tx:b.dataset.tx||''};else delete TSEL[k];w.innerHTML=zoneHtml(k);drawLeg();recolor()};
+let G=null;
+function gDraw(){const d=list[cur];const t=d&&TEINTES[d.modele];const el=$('eguide');
+  if(!G||!t){el.hidden=true;$('ezones').hidden=false;$('egbtn').hidden=false;$('eorig').hidden=false;return}
+  el.hidden=false;$('ezones').hidden=true;$('egbtn').hidden=true;$('eorig').hidden=true;
+  const n=t.zones.length;
+  if(G.k>=n){el.innerHTML=`<div class="gq">C’est terminé.</div><p class="note">Le tableau « Pièces à couper » est sous la photo.</p><div class="edrow"><button class="edbtn pri" data-g="restart">Recommencer</button><button class="edbtn" data-g="back">← Pièce précédente</button><button class="edbtn" data-g="free">Réglage libre</button></div>`;return}
+  const z=t.zones[G.k],head=`<div class="gstep">Pièce ${G.k+1} sur ${n}</div>`;
+  if(G.step==='mat')el.innerHTML=head+`<div class="gq">Quelle matière pour : ${esc(z.piece)} ?</div><div class="gm">${Object.keys(NUAN).map(m=>`<button class="edbtn" data-gm="${esc(m)}">${esc(m)}</button>`).join('')}</div><div class="edrow"><button class="edbtn" data-g="orig">Garder d’origine</button>${G.k?'<button class="edbtn" data-g="back">← Pièce précédente</button>':''}<button class="edbtn" data-g="free">Quitter le mode guidé</button></div>`;
+  else el.innerHTML=head+`<div class="gq">Quel coloris de ${esc(G.mat)} pour : ${esc(z.piece)} ?</div><div class="gsws">${NUAN[G.mat].map(([nm,c,tx])=>`<div class="gsw"><button data-c="${c}"${tx?` data-tx="${esc(tx)}"`:''} data-nm="${esc(G.mat+' '+nm)}" style="background:${c}${tx&&MOT[tx]?` url(${MOT[tx]}) center/cover`:''}" aria-label="${esc(nm)}"></button>${esc(nm)}</div>`).join('')}</div><div class="edrow"><button class="edbtn" data-g="mat">← Autre matière</button></div>`;
+  el.scrollIntoView({block:'nearest'})}
+$('egbtn').onclick=()=>{G={k:0,step:'mat'};gDraw()};
+$('eguide').onclick=e=>{const b=e.target.closest('button');if(!b)return;const k=G.k;
+  if(b.dataset.gm){G.mat=b.dataset.gm;G.step='col'}
+  else if(b.dataset.c){TSEL[k]={c:b.dataset.c,nom:b.dataset.nm,tx:b.dataset.tx||''};TMAT[k]=G.mat;drawLeg();recolor();G={k:k+1,step:'mat'}}
+  else{const a=b.dataset.g;
+    if(a==='orig'){delete TSEL[k];drawLeg();recolor();G={k:k+1,step:'mat'}}
+    else if(a==='back')G={k:Math.max(0,k-1),step:'mat'};
+    else if(a==='mat')G.step='mat';
+    else if(a==='restart'){TSEL={};for(const x in TMAT)delete TMAT[x];drawLeg();recolor();G={k:0,step:'mat'}}
+    else if(a==='free'){G=null;drawZones()}}
+  gDraw()};
 $('eorig').onclick=()=>{drawEssai();showPh()};
 const TXC={};async function texData(k){if(TXC[k])return TXC[k];const im=await ldImg(MOT[k]);const cv=document.createElement('canvas');cv.width=im.naturalWidth;cv.height=im.naturalHeight;const x=cv.getContext('2d');x.drawImage(im,0,0);return TXC[k]={w:cv.width,h:cv.height,d:x.getImageData(0,0,cv.width,cv.height).data}}
 async function recolor(){const d=list[cur];const t=TEINTES[d.modele];const job=++TJOB;
